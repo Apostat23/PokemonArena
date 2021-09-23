@@ -1,8 +1,9 @@
+# app/api/v1/pokemons_controller.rb
+
 class Api::V1::PokemonsController < ApplicationController
   before_action :set_pokemon
 
-  def show
-  end
+  def show; end
 
   private
 
