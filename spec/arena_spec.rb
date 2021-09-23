@@ -26,26 +26,26 @@ RSpec.describe Arena do
         it ".get_#{it}" do
           expect(subject.respond_to?("get_#{it}".to_sym)).to be true
           @names.each do |name| # <= Check @@info_tags when updating the below EXPLICIT methods.
-            expect(subject.get_abilities name).to eq @list[name]["abilities"] if it == "abilities"
-            expect(subject.get_base_experience name).to eq @list[name]["base_experience"] if it == "base_experience"
-            expect(subject.get_forms name).to eq @list[name]["forms"] if it == "forms"
-            expect(subject.get_game_indices name).to eq @list[name]["game_indices"] if it == "game_indices"
-            expect(subject.get_height name).to eq @list[name]["height"] if it == "height"
-            expect(subject.get_held_items name).to eq @list[name]["held_items"] if it == "held_items"
-            expect(subject.get_id name).to eq @list[name]["id"] if it == "id"
-            expect(subject.get_is_default name).to eq @list[name]["is_default"] if it == "is_default"
+            expect(subject.get_abilities name, @list).to eq @list[name]["abilities"] if it == "abilities"
+            expect(subject.get_base_experience name, @list).to eq @list[name]["base_experience"] if it == "base_experience"
+            expect(subject.get_forms name, @list).to eq @list[name]["forms"] if it == "forms"
+            expect(subject.get_game_indices name, @list).to eq @list[name]["game_indices"] if it == "game_indices"
+            expect(subject.get_height name, @list).to eq @list[name]["height"] if it == "height"
+            expect(subject.get_held_items name, @list).to eq @list[name]["held_items"] if it == "held_items"
+            expect(subject.get_id name, @list).to eq @list[name]["id"] if it == "id"
+            expect(subject.get_is_default name, @list).to eq @list[name]["is_default"] if it == "is_default"
             if it == "location_area_encounters"
-              expect(subject.get_location_area_encounters name).to eq @list[name]["location_area_encounters"]
+              expect(subject.get_location_area_encounters name, @list).to eq @list[name]["location_area_encounters"]
             end
-            expect(subject.get_moves name).to eq @list[name]["moves"] if it == "moves"
-            expect(subject.get_name name).to eq @list[name]["name"] if it == "name"
-            expect(subject.get_order name).to eq @list[name]["order"] if it == "order"
-            expect(subject.get_past_types name).to eq @list[name]["past_types"] if it == "past_types"
-            expect(subject.get_species name).to eq @list[name]["species"] if it == "species"
-            expect(subject.get_sprites name).to eq @list[name]["sprites"] if it == "sprites"
-            expect(subject.get_stats name).to eq @list[name]["stats"] if it == "stats"
-            expect(subject.get_types name).to eq @list[name]["types"] if it == "types"
-            expect(subject.get_weight name).to eq @list[name]["weight"] if it == "wheight"
+            expect(subject.get_moves name, @list).to eq @list[name]["moves"] if it == "moves"
+            expect(subject.get_name name, @list).to eq @list[name]["name"] if it == "name"
+            expect(subject.get_order name, @list).to eq @list[name]["order"] if it == "order"
+            expect(subject.get_past_types name, @list).to eq @list[name]["past_types"] if it == "past_types"
+            expect(subject.get_species name, @list).to eq @list[name]["species"] if it == "species"
+            expect(subject.get_sprites name, @list).to eq @list[name]["sprites"] if it == "sprites"
+            expect(subject.get_stats name, @list).to eq @list[name]["stats"] if it == "stats"
+            expect(subject.get_types name, @list).to eq @list[name]["types"] if it == "types"
+            expect(subject.get_weight name, @list).to eq @list[name]["weight"] if it == "wheight"
           end
         end
       end
