@@ -1,0 +1,116 @@
+<% api_name = params[:api_name] %>
+<% abilities = @list[api_name]["abilities"] %>
+<% base_experience = @list[api_name]["base_experience"] %>
+<% forms = @list[api_name]["forms"] %>
+<% game_indices = @list[api_name]["game_indices"] %>
+<% height = @list[api_name]["height"] %>
+<% held_items = @list[api_name]["held_items"] %>
+<% api_id = @list[api_name]["id"] %>
+<% is_default = @list[api_name]["is_default"] %>
+<% location_area_encounters = @list[api_name]["location_area_encounters"] %>
+<% moves = @list[api_name]["moves"] %>
+<% order = @list[api_name]["order"] %>
+<% past_types = @list[api_name]["past_types"] %>
+<% species = @list[api_name]["species"] %>
+<% sprites = @list[api_name]["sprites"] %>
+<% stats = @list[api_name]["stats"] %>
+<% types = @list[api_name]["types"] %>
+<% weight = @list[api_name]["weight"] %>
+<table>
+  <th><%= link_to image_tag('start/icon_left_arrow.png', :class => 'navigation'), root_path(url:  params[:url]) %></th>
+  <th>
+    <% if Pokemon.find_by(api_id: api_id) %>
+      <p>
+      <%= image_tag('start/icon_finished.png', :class => 'navigation') %> 
+      <%= link_to "JSON", api_v1_pokemon_path(id: Pokemon.find_by(api_id: api_id).id, :format => 'json'), :class => 'second' %></p>
+    <% else %>
+      <% if params[:api_id].present? %>
+        <% pokemon = Pokemon.new %>
+        <% pokemon.name = api_name %>
+        <% pokemon.abilities = abilities %>
+        <% pokemon.base_experience = base_experience %>
+        <% pokemon.forms = forms %>
+        <% pokemon.game_indices = game_indices %>
+        <% pokemon.height = height %>
+        <% pokemon.held_items = held_items %>
+        <% pokemon.api_id = api_id %>
+        <% pokemon.is_default = is_default %>
+        <% pokemon.location_area_encounters = location_area_encounters %>
+        <% pokemon.moves = moves %>
+        <% pokemon.order = order %>
+        <% pokemon.past_types = past_types %>
+        <% pokemon.species = species %>
+        <% pokemon.sprites = sprites %>
+        <% pokemon.stats = stats %>
+        <% pokemon.types = types %>
+        <% pokemon.weight = weight %>
+        <% pokemon.save! %>
+        <%= image_tag('start/icon_finished.png', :class => 'navigation') %>
+        <%= link_to "JSON", api_v1_pokemon_path(id: Pokemon.last.id, :format => 'json'), :class => 'second' %></p>
+      <% else %>
+        <%= link_to image_tag('start/icon_add.png', :class => 'navigation'), start_pokemon_path(api_id:  api_id, api_name: api_name, url: params[:url]) %>
+      <% end %>
+    <% end %>
+  </th>
+  <th><h1 class="first">ID. <%= @list[api_name]["id"]  %></h1></th>
+  <th><%= image_tag "#{@list[api_name]["sprites"]["front_default"]}", :class => 'pokemon' %></th>
+  <th><h1 class="chlorinar_first"><%= @list[api_name]["name"].capitalize %></h1></th>
+</table>
+
+<p class='neutral'>
+<%= translate('abilities').capitalize%><br><% abilities.each do |ability| %>
+  <%= ability["slot"] %>. 
+  <%= link_to ability["ability"]["name"].capitalize, ability["ability"]["url"], :class => 'second' %> 
+  (<%= ability["is_hidden"] ? "hidden" : "visible" %>)<br>
+<% end %><br>
+
+<%= translate('base_experience').capitalize %> <%= base_experience %><br><br>
+
+<%= translate('forms').capitalize %> <br><% forms.each do |form| %>
+  <%= link_to form["name"], form["url"], :class => 'second' %><br>
+<% end %><br>
+
+<%= translate('game_indices').capitalize %> <br><% game_indices.each do |indice| %>
+  <%= link_to "#{indice["game_index"]} - #{indice["version"]["name"]}", indice["version"]["url"], :class => 'second' %><br>
+<% end %><br>
+
+<%= translate('height').capitalize %> <%= height %><br><br>
+
+<%= translate('held_items').capitalize %> <br><% held_items.each do |item| %>
+  <%= link_to item["item"]["name"], item["url"], :class => 'second' %><br>
+<% end %><br>
+
+Api ID <%= api_id %><br><br>
+
+<%= translate('is_default').capitalize %> <%= is_default ? true : false %><br><br>
+
+<%= translate('location_area_encounters').capitalize %> <%= link_to "see encounters", location_area_encounters, :class => 'second' %><br><br>
+
+<%= translate('moves').capitalize %> <br><% moves.each do |move| %>
+  <%= link_to move["move"]["name"], move["move"]["url"], :class => 'second' %><br>
+<% end %><br>
+
+Order <%= order %><br><br>
+
+<%= translate('past_types').capitalize %> <br><% past_types.each do |past_type| %>
+  <%= link_to past_type["generation"]["name"], past_type["generation"]["name"], :class => 'second' %><br> 
+  Types: <% past_type["types"].each do |type| %>
+    <%= link_to type["type"]["name"], type["type"]['url'], :class => 'second' %><br>
+  <% end %>
+<% end %><br>
+
+<%= translate('species').capitalize %> <br><%= link_to species["name"], species["url"], :class => 'second' %><br><br>
+
+<%= translate('sprites').capitalize %> <br><% sprites.each do |key, value| %>
+  <%= key %> <%= image_tag value, :class => 'pokemon' if value.class == String %><br>
+<% end %><br>
+
+<%= translate('stats').capitalize %> <br><% stats.each do |stat| %>
+  <%= link_to stat["stat"]["name"], stat["stat"]["url"], :class => 'second' %><br>
+<% end %><br>
+
+<%= translate('types').capitalize %> <br><% types.each do |type| %>
+  <%= type["slot"] %>. <%= link_to type["type"]["name"], type["type"]["url"], :class => 'second' %><br>
+<% end %><br>
+
+<%= translate('weight').capitalize %> <%= weight %><br></p>

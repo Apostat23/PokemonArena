@@ -1,0 +1,34 @@
+<% if user_signed_in? %><%# Swtiches the links on menu according to user_signed_in? %>
+  <% if current_page?(root_path) %><%# Swtiches the links on menu according to current_page and root_path %>
+    <p><%= link_to "#{(translate ('log_out')).capitalize}", destroy_user_session_path, :method => 'delete', :class => "second_to_first" %></p>
+  <% else %>
+    <p><%= link_to "#{(translate ('start')).capitalize}", root_path, :class => "second_to_first" %></p>
+  <% end %>
+<% else# user_signed_in? %>
+  <% if current_page?(root_path) %><%# Swtiches the links on menu according to current_page and root_path %>
+    <p><%= link_to "#{(translate ('sign_up')).capitalize}", new_user_registration_path, :class => "second_to_first" %><br><%= link_to "#{(translate ('log_in')).capitalize}", new_user_session_path, :class => "second_to_first" %></p>
+  <% else %>
+    <p><%= link_to "#{(translate ('start')).capitalize}", root_path, :class => "second_to_first" %></p>
+  <% end %>
+<% end# user_signed_in? %>
+
+<div class="container_main_menu">
+  <header>
+    <input type="checkbox" id="button_main_menu">
+    <label for="button_main_menu">
+      <%= image_tag 'start/icon_menu.png', :width => '10%', :height => 'auto', :title => 'Main menu', :alt => 'Main menu' %>
+      <font style="font-size:2vw;font-family:'sans-serif';color:#808080"><%= (translate ('more')).capitalize %>...</font>
+    </label>
+    <nav class="main_menu">
+      <ul>
+        <li><%= link_to "#{(translate ('pricing')).capitalize}", root_path %></li>
+        <li><%= link_to "#{(translate ('products')).capitalize}", root_path %></li>
+        <li><%= link_to "#{(translate ('services')).capitalize}", root_path %></li>
+        <li><%= link_to "#{(translate ('about_us')).capitalize}", root_path %></li>
+        <li><%= link_to "#{(translate ('contact')).capitalize}", root_path %></li>
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<%# Sets a random welcome EN/ES sentence %>

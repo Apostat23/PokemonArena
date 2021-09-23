@@ -1,0 +1,38 @@
+<table>
+  <th><%= link_to image_tag('start/icon_left_arrow.png', :class => 'navigation'), root_path(url:  @data["previous"]) %></th>
+  <th><h1 class="burnstown_first">Pokemon list</h1></th>
+  <th><%= link_to image_tag('start/icon_right_arrow.png', :class => 'navigation'), root_path(url: @data["next"]) %></th>
+</table>
+<% if user_signed_in? %>
+  <% @list.keys.each do |name| %>
+    <%# abilities = @pokemon.get_abilities name, @list %>
+    <%# base_experience = @pokemon.get_base_experience name, @list %>
+    <%# forms = @pokemon.get_forms name, @list %>
+    <%# game_indices = @pokemon.get_game_indices name, @list %>
+    <% api_id = @pokemon.get_id name, @list %>
+    <%# is_default = @pokemon.get_is_default name, @list %>
+    <%# location_area_encounters = @pokemon.get_location_area_encounters name, @list %>
+    <%# moves = @pokemon.get_moves name, @list %>
+    <% api_name = @pokemon.get_name name, @list %>
+    <%# order = @pokemon.get_order name, @list %>
+    <%# past_types = @pokemon.get_id name, @list %>
+    <%# species = @pokemon.get_species name, @list %>
+    <% sprites = @pokemon.get_sprites name, @list %>
+    <%# stats = @pokemon.get_stats name, @list %>
+    <%# types = @pokemon.get_types name, @list %>
+    <%# weight = @pokemon.get_weight name, @list %>
+    
+    <table>
+      <th><h1 class="neutral"><%= api_id  %></h1></th>
+      <th> <%= link_to image_tag('start/icon_statistics.png', :class => 'navigation'), start_pokemon_path(api_name: api_name, url: params[:url]) %> </th>
+      <th><%= image_tag "#{sprites["front_default"]}", :class => 'pokemon' %></th>
+      <% if Pokemon.find_by(api_id: api_id) %>
+        <th><h1 class="chlorinar_third"><%= name.capitalize  %></h1></th>
+      <% else %>
+        <th><h1 class="chlorinar_neutral"><%= name.capitalize  %></h1></th>
+      <% end %>
+
+    </table>
+  <% end %>
+<% else# user_signed_in? %>
+<% end# user_signed_in? %>

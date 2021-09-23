@@ -1,0 +1,15 @@
+json.api_id @pokemon.api_id
+json.abilities eval(@pokemon.abilities)
+json.base_experience @pokemon.base_experience
+json.forms eval(@pokemon.forms)
+json.game_indices eval(@pokemon.game_indices)
+json.held_items eval(@pokemon.held_items)
+json.is_default @pokemon.is_default
+json.moves eval(@pokemon.moves)
+json.order @pokemon.order
+json.past_types eval(@pokemon.past_types)
+json.species eval(@pokemon.species)
+json.sprites eval(@pokemon.sprites)
+json.stats eval(@pokemon.stats)
+json.types eval(@pokemon.types)
+json.weight @pokemon.weight

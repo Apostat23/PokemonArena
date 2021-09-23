@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pokemon Arena</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%# Sets @atmosfera and @sidebar if defined by params %>
+    <% @atmosfera = params[:atmosfera] if params[:atmosfera].present? %>
+    <% @sidebar = params[:sidebar] if params[:sidebar].present? %>
+    <%# Initializes @atmosfera and @sidebar if not defined yet %>
+    <% @atmosfera = 'start' if defined?(@atmosfera).nil? %>
+    <% @sidebar = 'left' if defined?(@sidebar).nil? %> 
+    <% case @atmosfera %>
+      <% when 'start' %>
+        <%= stylesheet_link_tag    'start', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <title>Insoftver Atmosfera</title>
+      <% else # de case @atmosfera %>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% end # de case @atmosfera %>
+  </head>
+
+  <body>
+    <%= render 'start/top' %>
+    <table>
+      <% case @sidebar %>
+        <% when 'false' %>
+          <td><%= yield %></td>
+        <% when 'left' %>
+          <td style="width:25%;vertical-align:top;"><%= render 'start/menu' %></td>
+          <td style="width:75%;vertical-align:top;"><%= yield %></td>
+        <% when 'right' %>
+          <td style="width:75%;vertical-align:top;"><%= yield %></td>
+          <td style="width:25%;vertical-align:top;"><%= render 'start/menu' %></td>
+        <% else # de case @sidebar %>
+      <% end # de case @sidebar %>
+    </table>
+    <%= render 'start/bottom' %>
+  </body>
+</html>
