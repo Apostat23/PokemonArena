@@ -1,11 +1,8 @@
-require 'arena'
-
 class StartController < ApplicationController
   before_action :get_pokemon
 
   def get_pokemon
     params[:url].present? ? @request = get_data(params[:url]) : @request = get_data
-    @data = @request.data; @list = @request.list; @info_tags = @request.info_tags
   end
 
   attr_accessor :data, :list, :info_tags and def get_data url: nil
